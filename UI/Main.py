@@ -1,9 +1,9 @@
 # coding=utf-8
 import os.path
 import sys
+sys.path.append(r'D:\lesson_detail\SVRemmendation')
 
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd()) + os.path.sep + "."))  # 配置项目路径变量
-
 import IO
 import time
 from PyQt5 import QtWidgets
@@ -54,7 +54,6 @@ if __name__ == '__main__':
     widget.show()
 
     SetWndIcon(widget)  # 增加icon图标
-
     exit_code = app.exec_()
 
     # 读取配置文件

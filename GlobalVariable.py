@@ -3,8 +3,8 @@
 维护全局变量：全局用户列表、全局视频列表
 """
 
-import InitWeightMatrix
 
+import InitWeightMatrix
 
 def help_find(uid: int, global_list, bToDelete: bool, bFastModel):  # bToDelete 指明在遍历时是否删除该元素，用于提高删除效率
     if bFastModel:  # 快速模式下不遍历链表，直接返回False，即默认原列表不存在
@@ -50,7 +50,7 @@ class GlobalVariable:
             return False
 
     @staticmethod
-    def set_video_hot(video, bSet=True):  # 设置视频视为为热，默认调用设为热
+    def set_video_hot(video, bSet=True):  # 设置视频视为热，默认调用设为热
         if bSet:
             video.hot = True
         else:
@@ -73,5 +73,5 @@ class GlobalVariable:
 
 global_obj = GlobalVariable()  # 全局变量
 refresh_frequency = 100  # 用户刷n条视频后重新计算权重
-hot_add_weight_percent: float = 300  # 对于被设置为“热”的视频，以百分比方式增加权重，如原来权重为3，则增加为3*(1+300)
+hot_add_weight_percent: float = 300  # 这个地方和文档不一样，看看什么原因
 testVideos = 100000  # 用于测试的视频数，也是从文件读取的视频数

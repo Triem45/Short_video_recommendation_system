@@ -56,7 +56,11 @@ class Video:
 
     # 观看一次视频，更改已观看用户信息
     # 输入：观看用户、观看时长
-    def new_user(self, uid):
+    def new_user(self, uid,is_like=0,is_comment=0,is_share=0):
         # 根据id查找是否该用户已观看过，若是，次数加1，修改平均停留时长；否则新加
-        self.watch = self.watch + 1
-        self.user_list.append(uid)
+        if uid not in self.user_list:
+            self.watch = self.watch + 1
+            self.user_list.append(uid)
+            self.like += is_like, 
+            self.comment += is_comment 
+            self.share += is_share

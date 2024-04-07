@@ -5,10 +5,10 @@ import pandas as pd
 import TimeTest
 from GlobalVariable import global_obj
 
-file_path = '../Data.csv'
+file_path = 'D:\lesson_detail\SVRemmendation\Data.csv'
 
 
-def take_uid(video):
+def take_uid(video):     ##返回视频的id号
     return video.uid
 
 

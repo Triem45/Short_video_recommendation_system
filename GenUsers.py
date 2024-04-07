@@ -11,7 +11,7 @@ def take_uid(user):
 @TimeTest.Krxk_Clock
 def GenUsers():
     import threading
-    # print('begin generate users')
+    print('begin generate users')
     total_size = 20000  # 指明要生成的用户数
     group_size = 1000
     group_num = int(total_size / group_size) + 1
@@ -25,7 +25,7 @@ def GenUsers():
         t.join()
 
     global_obj.GlobalUserList.sort(key=take_uid, reverse=False)
-    # print('generate users done')
+    print('generate users done')
 
 
 @TimeTest.Krxk_Clock
