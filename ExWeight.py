@@ -23,6 +23,8 @@ class ExtraWeight:
         if temp_sum != 0:
             category_arr /= category_arr.sum()
 
+        self.exWeightList = category_arr
+
     def GetExWeight(self, video):
         self.GenExWeight()
         return self.exWeightList[video.category]

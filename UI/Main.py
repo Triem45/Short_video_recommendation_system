@@ -1,6 +1,7 @@
 # coding=utf-8
 import os.path
 import sys
+sys.path.append(r'D:\Lib\site-packages')
 sys.path.append(r'D:\lesson_detail\SVRemmendation')
 
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd()) + os.path.sep + "."))  # 配置项目路径变量

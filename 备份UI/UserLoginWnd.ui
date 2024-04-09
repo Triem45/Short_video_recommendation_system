@@ -16,10 +16,10 @@
   <widget class="QListWidget" name="listToPlay">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>260</y>
-     <width>321</width>
-     <height>451</height>
+     <x>40</x>
+     <y>170</y>
+     <width>431</width>
+     <height>601</height>
     </rect>
    </property>
    <property name="font">
@@ -61,10 +61,10 @@
   <widget class="QListView" name="listHistory">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>260</y>
-     <width>301</width>
-     <height>451</height>
+     <x>510</x>
+     <y>170</y>
+     <width>411</width>
+     <height>601</height>
     </rect>
    </property>
    <property name="font">
@@ -77,8 +77,8 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>640</x>
-     <y>210</y>
+     <x>670</x>
+     <y>130</y>
      <width>121</width>
      <height>51</height>
     </rect>
@@ -97,7 +97,7 @@
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>210</y>
+     <y>130</y>
      <width>151</width>
      <height>51</height>
     </rect>
@@ -128,14 +128,14 @@
     </font>
    </property>
    <property name="text">
-    <string>登录用户</string>
+    <string>查询</string>
    </property>
   </widget>
   <widget class="QPushButton" name="Share">
    <property name="geometry">
     <rect>
-     <x>670</x>
-     <y>170</y>
+     <x>760</x>
+     <y>90</y>
      <width>141</width>
      <height>41</height>
     </rect>
@@ -153,8 +153,8 @@
   <widget class="QPushButton" name="Comment">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>170</y>
+     <x>410</x>
+     <y>90</y>
      <width>141</width>
      <height>41</height>
     </rect>
@@ -172,8 +172,8 @@
   <widget class="QPushButton" name="Praise">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>170</y>
+     <x>50</x>
+     <y>90</y>
      <width>141</width>
      <height>41</height>
     </rect>
@@ -186,54 +186,6 @@
    </property>
    <property name="text">
     <string>点赞</string>
-   </property>
-  </widget>
-  <widget class="QListView" name="listView">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>110</y>
-     <width>401</width>
-     <height>51</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="Query_2">
-   <property name="geometry">
-    <rect>
-     <x>700</x>
-     <y>110</y>
-     <width>141</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>隶书</family>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>下一个视频</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>60</y>
-     <width>151</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>隶书</family>
-     <pointsize>18</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>当前播放视频</string>
    </property>
   </widget>
  </widget>

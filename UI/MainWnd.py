@@ -10,7 +10,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QDialog
-
 from UserLoginWnd import Ui_UserLoginWnd
 from VideoLoginWnd import Ui_VideoLoginWnd
 from AnalysisWnd import Ui_AnalysisWnd

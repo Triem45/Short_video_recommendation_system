@@ -9,7 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from GlobalVariable import global_obj
+from GenUsers import total_size
+import GlobalVariable
 
 class Ui_VideoLoginWnd(object):
     def setupUi(self, VideoLoginWnd):
@@ -32,14 +34,14 @@ class Ui_VideoLoginWnd(object):
         font.setPointSize(22)
         self.Query.setFont(font)
         self.Query.setObjectName("Query")
-        self.listView = QtWidgets.QListView(VideoLoginWnd)
+        self.listView = QtWidgets.QListWidget(VideoLoginWnd)
         self.listView.setGeometry(QtCore.QRect(30, 140, 401, 541))
         font = QtGui.QFont()
         font.setFamily("宋体")
         font.setPointSize(14)
         self.listView.setFont(font)
         self.listView.setObjectName("listView")
-        self.listView_2 = QtWidgets.QListView(VideoLoginWnd)
+        self.listView_2 = QtWidgets.QListWidget(VideoLoginWnd)
         self.listView_2.setGeometry(QtCore.QRect(450, 140, 401, 541))
         font = QtGui.QFont()
         font.setFamily("宋体")
@@ -69,7 +71,8 @@ class Ui_VideoLoginWnd(object):
         self.Query_2.setObjectName("Query_2")
 
         self.retranslateUi(VideoLoginWnd)
-        self.Query.clicked.connect(VideoLoginWnd.close) # type: ignore
+        self.Query.clicked.connect(self.query) # type: ignore
+        self.Query_2.clicked.connect(self.set_hot)  # type: ignore
         QtCore.QMetaObject.connectSlotsByName(VideoLoginWnd)
 
     def retranslateUi(self, VideoLoginWnd):
@@ -80,6 +83,54 @@ class Ui_VideoLoginWnd(object):
         self.label_2.setText(_translate("VideoLoginWnd", "视频统计信息"))
         self.label_3.setText(_translate("VideoLoginWnd", "已观看用户"))
         self.Query_2.setText(_translate("VideoLoginWnd", "设为热点"))
+
+    def set_hot(self):
+        uid = int(self.textEdit.toPlainText())
+        if uid > total_size: ##输入的id超范围 重新输入
+            self.textEdit.clear()
+            return
+
+        self.textEdit.clear()
+        for item in global_obj.GlobalVideoList:
+            if item.uid == uid:
+                GlobalVariable.GlobalVariable.set_video_hot(item)
+                break
+        self.textEdit.clear()
+
+    def query(self):
+        self.listView_2.clear()
+        self.listView.clear()
+
+        uid = int(self.textEdit.toPlainText())
+        if uid > total_size: ##输入的id超范围 重新输入
+            self.textEdit.clear()
+            return
+
+        self.textEdit.clear()
+        for item in global_obj.GlobalVideoList:
+            if item.uid == uid:
+                index = global_obj.GlobalVideoList.index(item)
+                category = global_obj.GlobalVideoList[index].category
+                length = global_obj.GlobalVideoList[index].length
+                name = global_obj.GlobalVideoList[index].name
+                watch = global_obj.GlobalVideoList[index].watch
+                hot = global_obj.GlobalVideoList[index].hot
+                like = global_obj.GlobalVideoList[index].like
+                comment = global_obj.GlobalVideoList[index].comment
+                share = global_obj.GlobalVideoList[index].share
+                user_list = global_obj.GlobalVideoList[index].user_list
+                break
+
+        self.listView.addItem('分类 '+str(category))
+        self.listView.addItem('视频名称 ' + str(name))
+        self.listView.addItem('长度 ' + str(length))
+        self.listView.addItem('是否为热点视频 ' + str('是' if hot else '否'))
+        self.listView.addItem('点赞人数 ' + str(like))
+        self.listView.addItem('评论数 ' + str(comment))
+        self.listView.addItem('分享数 ' + str(share))
+        self.listView_2.addItem('用户列表')
+        for user in user_list:
+            self.listView_2.addItem(''+str(user)+' ')
 
 if __name__ == '__main__':
     import sys

@@ -11,7 +11,7 @@
 import TimeTest
 import Weight
 from GlobalVariable import global_obj
-
+import random
 
 class User:
     # 工作阶段(维度1)
@@ -88,7 +88,9 @@ class User:
     def HelpRefreshWeight(self):  # 重新计算权重
         self.temp_play_list = []
         from SortList import VideoListSort
-        for video in global_obj.GlobalVideoList:
+
+        random_video_list = random.sample(global_obj.GlobalVideoList, k=100) #这里随机选择100个视频
+        for video in random_video_list:
             weight = self.weight_obj.CalWeight(video)
             self.temp_play_list.append([video.uid, weight])
             if len(self.temp_play_list)>100:

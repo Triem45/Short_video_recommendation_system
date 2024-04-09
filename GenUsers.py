@@ -3,6 +3,8 @@ import TimeTest
 from GlobalVariable import testVideos
 from GlobalVariable import global_obj
 
+total_size = 20000  # 指明要生成的用户数
+
 
 def take_uid(user):
     return user.uid
@@ -12,7 +14,6 @@ def take_uid(user):
 def GenUsers():
     import threading
     print('begin generate users')
-    total_size = 20000  # 指明要生成的用户数
     group_size = 1000
     group_num = int(total_size / group_size) + 1
     thread_list = []
