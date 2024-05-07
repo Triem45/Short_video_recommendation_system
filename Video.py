@@ -53,7 +53,6 @@ class Video:
         self.comment = comment
         self.share = share
         self.user_list = []  # 记录用户uid
-
     # 观看一次视频，更改已观看用户信息
     # 输入：观看用户、观看时长
     def new_user(self, uid): ##点赞这里

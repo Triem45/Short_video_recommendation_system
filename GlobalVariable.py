@@ -21,8 +21,12 @@ class GlobalVariable:
     def __init__(self):
         self.GlobalVideoList = []
         self.GlobalUserList = []
+        self.user_video_score={}
         self.InitWeight = InitWeightMatrix.InitWeight()  # 初始权重具有全局性
-
+    def add_videoscore(self, user_id,video_id,score):
+        if user_id not in self.user_video_score:
+            self.user_video_score[user_id] = {}
+        self.user_video_score[user_id][video_id] = score
     def GetTotalUserCount(self):
         return len(self.GlobalUserList)
 

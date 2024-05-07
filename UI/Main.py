@@ -1,18 +1,26 @@
 # coding=utf-8
 import os.path
 import sys
-sys.path.append(r'D:\Lib\site-packages')
-sys.path.append(r'D:\lesson_detail\SVRemmendation')
+sys.path.append(r'E:\python包')
+sys.path.append(r'D:\SVRemmendation')
 
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd()) + os.path.sep + "."))  # 配置项目路径变量
 import IO
 import time
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import QObject,QEvent
 import welcome
 import MainWnd
 from GenUsers import GenUsers
 import configparser
 
+class EventFilterProxy(QObject):
+    def __init__(self, event_filter_func):
+        super().__init__()
+        self.event_filter_func = event_filter_func
+
+    def eventFilter(self, obj, event):
+        return self.event_filter_func(obj, event)
 
 def close_welcome(thread1, thread2, wnd):  # 等待准备工作完成然后关闭欢迎窗口
     thread1.start()
@@ -20,7 +28,10 @@ def close_welcome(thread1, thread2, wnd):  # 等待准备工作完成然后关�
     thread1.join()
     thread2.join()
     wnd.close()
-
+def mainwnd_event_filter(obj, event):
+    if obj is widget and event.type() == QEvent.Close:
+        IO.SaveToFile()
+    return False  # 保持默认事件处理
 
 if __name__ == '__main__':
     # 准备工作，启动线程
@@ -52,6 +63,8 @@ if __name__ == '__main__':
     widget = QtWidgets.QWidget()
     main_wnd = MainWnd.Ui_MainWnd()
     main_wnd.setupUi(widget)
+    event_filter_proxy = EventFilterProxy(mainwnd_event_filter)
+    widget.installEventFilter(event_filter_proxy)
     widget.show()
 
     SetWndIcon(widget)  # 增加icon图标
