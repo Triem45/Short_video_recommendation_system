@@ -13,6 +13,12 @@ import welcome
 import MainWnd
 from GenUsers import GenUsers
 import configparser
+import ReadUsers
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QGraphicsOpacityEffect
+
+def SetWndIcon(Wnd):  
+    Wnd.setWindowIcon(QIcon(r'C:\Users\27879\Desktop\SVRemmendation\recommend.jpg'))
 
 class EventFilterProxy(QObject):
     def __init__(self, event_filter_func):
@@ -30,7 +36,8 @@ def close_welcome(thread1, thread2, wnd):  # 等待准备工作完成然后关�
     wnd.close()
 def mainwnd_event_filter(obj, event):
     if obj is widget and event.type() == QEvent.Close:
-        IO.SaveToFile()
+        print('保存完毕')
+        ##IO.SaveToFile()
     return False  # 保持默认事件处理
 
 if __name__ == '__main__':
@@ -39,7 +46,7 @@ if __name__ == '__main__':
     import threading
 
     th1 = threading.Thread(target=IO.ReadFromFile, args=())
-    th2 = threading.Thread(target=GenUsers, args=())
+    th2 = threading.Thread(target=ReadUsers.ReadUsers, args=())
 
     app = QtWidgets.QApplication(sys.argv)
     widget_wel = QtWidgets.QWidget()
@@ -49,7 +56,6 @@ if __name__ == '__main__':
     welcome_wnd = welcome.Ui_Welcome()
     welcome_wnd.setupUi(widget_wel)
     widget_wel.show()
-    from ReloadIcon import SetWndIcon
 
     SetWndIcon(widget_wel)  # 增加icon图标
 
@@ -64,7 +70,8 @@ if __name__ == '__main__':
     main_wnd = MainWnd.Ui_MainWnd()
     main_wnd.setupUi(widget)
     event_filter_proxy = EventFilterProxy(mainwnd_event_filter)
-    widget.installEventFilter(event_filter_proxy)
+    widget.installEventFilter(event_filter_proxy)   
+    
     widget.show()
 
     SetWndIcon(widget)  # 增加icon图标

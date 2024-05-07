@@ -2,8 +2,7 @@
 import os.path
 import pandas as pd
 import sys
-sys.path.append(r'E:\python包')
-sys.path.append(r'D:\SVRemmendation')
+sys.path.append(r'C:\Users\27879\Desktop\SVRemmendation')
 import scipy.sparse as sps
 import numpy as np
 from sklearn.cluster import KMeans

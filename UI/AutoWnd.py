@@ -43,7 +43,7 @@ class AutoWnd(UserLoginWndLogic):
 class AutoSimulationManager:
     def __init__(self):
         self.executor = concurrent.futures.ThreadPoolExecutor(max_workers=50)  # 创建线程池，设置最大线程数
-    @TimeTest.Krxk_Clock
+    @TimeTest.time_spend_show
     def start_auto_simulation(self):
         futures = []
         start_time = time.time()  # 记录开始执行任务的时间

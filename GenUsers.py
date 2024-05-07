@@ -27,7 +27,7 @@ def take_uid(user):
     return user.uid
 
 
-@TimeTest.Krxk_Clock
+@TimeTest.time_spend_show
 def GenUsers():
     import threading
     print('begin generate users')
@@ -46,7 +46,7 @@ def GenUsers():
     print('generate users done')
 
 
-@TimeTest.Krxk_Clock
+@TimeTest.time_spend_show
 def HelpGenUsers(start_uid, end_uid):
     from User import User
     import random

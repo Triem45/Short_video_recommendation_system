@@ -2,8 +2,7 @@
 import os.path
 import pandas as pd
 import sys
-sys.path.append(r'E:\python包')
-sys.path.append(r'D:\SVRemmendation')
+sys.path.append(r'C:\Users\27879\Desktop\SVRemmendation')
 import scipy.sparse as sps
 import numpy as np
 from sklearn.cluster import KMeans
@@ -135,7 +134,7 @@ if __name__ == '__main__':
     plt.grid(True)
     plt.show()
 '''
-    # 使用最佳K值重新运行K-means聚类（这里最佳K值为10）
+# 使用最佳K值重新运行K-means聚类（这里最佳K值为10）
     kmeans = KMeans(n_clusters=10, random_state=42)
     kmeans.fit(video_clu_features)
 

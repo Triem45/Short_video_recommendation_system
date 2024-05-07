@@ -6,7 +6,7 @@ import pandas as pd
 import TimeTest
 from GlobalVariable import global_obj
 
-file_path = 'D:\SVRemmendation\Data.csv'
+file_path = r'C:\Users\27879\Desktop\SVRemmendation\Data.csv'
 from PyQt5.QtCore import QObject, QThread, pyqtSignal
 video_feature_data=[]
 max_uid=100001
@@ -15,7 +15,7 @@ def take_uid(video):     ##返回视频的id号
     return video.uid
 
 
-@TimeTest.Krxk_Clock
+@TimeTest.time_spend_show
 def ReadFromFile():
     from GenUsers import testVideos
     import threading
@@ -36,7 +36,7 @@ def ReadFromFile():
     global_obj.GlobalVideoList.sort(key=take_uid, reverse=False)  # 升序排列
 
 
-@TimeTest.Krxk_Clock
+@TimeTest.time_spend_show
 def WriteToMemory(data):
     from Video import Video
     for index, row in data.iterrows():
@@ -84,7 +84,7 @@ def ConvertListToStr(ul: list):
     return result
 
 
-@TimeTest.Krxk_Clock
+@TimeTest.time_spend_show
 def SaveToFile():
     df = pd.DataFrame(columns=['category', 'ID', 'length', 'comment', 'like', 'watch', 'share', 'name', 'user_list'])
     for i, video in enumerate(global_obj.GlobalVideoList):
