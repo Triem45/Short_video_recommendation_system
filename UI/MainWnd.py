@@ -13,7 +13,6 @@ from PyQt5.QtCore import QObject, pyqtSignal
 from PyQt5.QtWidgets import QDialog
 from UserLoginWnd import Ui_UserLoginWnd
 from VideoLoginWnd import Ui_VideoLoginWnd
-from AnalysisWnd import Ui_AnalysisWnd
 import AutoWnd
 import sys
 sys.path.append(r'C:\Users\27879\Desktop\SVRemmendation')
@@ -29,7 +28,7 @@ def ConvertListToStr(ul: list,id,catelist:list):
         except: continue
     result = result[:-1]
     return result
-def SaveUserToFile():
+def SaveUserToFile(file_path = r'C:\Users\27879\Desktop\SVRemmendation\Data.csv'):
     df = pd.DataFrame(columns=[ 'UID', 'work_phase', 'gender', 'job', 'video_list'])
     catelist = {}
     for video in global_obj.GlobalVideoList:
@@ -49,14 +48,14 @@ class Ui_MainWnd(QObject):
         MainWnd.setObjectName("MainWnd")
         MainWnd.resize(370, 500)
         self.UL = QtWidgets.QPushButton(MainWnd)
-        self.UL.setGeometry(QtCore.QRect(50, 30, 241, 81))
+        self.UL.setGeometry(QtCore.QRect(60, 50, 241, 81))
         font = QtGui.QFont()
         font.setFamily("隶书")
         font.setPointSize(22)
         self.UL.setFont(font)
         self.UL.setObjectName("UL")
         self.VL = QtWidgets.QPushButton(MainWnd)
-        self.VL.setGeometry(QtCore.QRect(50, 130, 241, 91))
+        self.VL.setGeometry(QtCore.QRect(60, 170, 241, 81))
         font = QtGui.QFont()
         font.setFamily("隶书")
         font.setPointSize(22)
@@ -64,20 +63,13 @@ class Ui_MainWnd(QObject):
         self.VL.setObjectName("VL")
 
         self.YL = QtWidgets.QPushButton(MainWnd)
-        self.YL.setGeometry(QtCore.QRect(50, 240, 241, 81))
+        self.YL.setGeometry(QtCore.QRect(60, 290, 241, 81))
         font = QtGui.QFont()
         font.setFamily("隶书")
         font.setPointSize(22)
         self.YL.setFont(font)
         self.YL.setObjectName("YL")
 
-        self.Analysis = QtWidgets.QPushButton(MainWnd)
-        self.Analysis.setGeometry(QtCore.QRect(50, 340, 241, 91))
-        font = QtGui.QFont()
-        font.setFamily("隶书")
-        font.setPointSize(22)
-        self.Analysis.setFont(font)
-        self.Analysis.setObjectName("Analysis")
 
                 # 添加背景图片
         self.label_bg = QtWidgets.QLabel(MainWnd)
@@ -102,7 +94,6 @@ class Ui_MainWnd(QObject):
         self.UL.clicked.connect(self.open_UserLoginWnd) # type: ignore
         self.VL.clicked.connect(self.open_VideoLoginWnd) # type: ignore
         self.YL.clicked.connect(self.auto_operate)
-        self.Analysis.clicked.connect(self.open_AnalysisWnd) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWnd)
 
     def retranslateUi(self, MainWnd):
@@ -111,7 +102,6 @@ class Ui_MainWnd(QObject):
         self.UL.setText(_translate("MainWnd", "用户登录"))
         self.VL.setText(_translate("MainWnd", "视频登录"))
         self.YL.setText(_translate("MainWnd", "一键生成"))
-        self.Analysis.setText(_translate("MainWnd", "统计分析"))
 
     def open_UserLoginWnd(self):
         self.another_window = QtWidgets.QMainWindow()
@@ -130,9 +120,3 @@ class Ui_MainWnd(QObject):
         self.simulation_manager.start_auto_simulation()
         self.simulation_finished.emit()  # 发送信号，告知模拟结束
         SaveUserToFile()
-    def open_AnalysisWnd(self):
-        self.another_window = QtWidgets.QMainWindow()
-        self.ui = Ui_AnalysisWnd()
-        self.ui.setupUi(self.another_window)
-        self.another_window.show()
-    

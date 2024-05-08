@@ -12,7 +12,37 @@ import TimeTest
 import Weight
 from GlobalVariable import global_obj
 import random
+def VideoListSort(vl: list):
+    key_col = 1  # 权重位置
+    if len(vl) > 1:
+        mid = len(vl) // 2
 
+        left_arr = vl[:mid]
+        right_arr = vl[mid:]
+
+        VideoListSort(left_arr)
+        VideoListSort(right_arr)
+
+        i = j = k = 0
+
+        while i < len(left_arr) and j < len(right_arr):
+            if left_arr[i][key_col] > right_arr[j][key_col]:
+                vl[k] = left_arr[i]
+                i += 1
+            else:
+                vl[k] = right_arr[j]
+                j += 1
+            k += 1
+
+        while i < len(left_arr):
+            vl[k] = left_arr[i]
+            i += 1
+            k += 1
+
+        while j < len(right_arr):
+            vl[k] = right_arr[j]
+            j += 1
+            k += 1
 class User:
     # 工作阶段(维度1)
     # 0-学生，1-刚入职1年内，2-入职1-5年，3-入职5-10年，4-入职10年以上
@@ -87,7 +117,6 @@ class User:
     @TimeTest.time_spend_show
     def HelpRefreshWeight(self):  # 重新计算权重
         self.temp_play_list = []
-        from SortList import VideoListSort
 
         random_video_list = random.sample(global_obj.GlobalVideoList, k=100) #这里随机选择100个视频
         for video in random_video_list:

@@ -1,9 +1,6 @@
 # coding=utf-8
 import os.path
 import sys
-sys.path.append(r'E:\python包')
-sys.path.append(r'D:\SVRemmendation')
-
 sys.path.append(os.path.abspath(os.path.dirname(os.getcwd()) + os.path.sep + "."))  # 配置项目路径变量
 import IO
 import time
@@ -16,7 +13,7 @@ import configparser
 import ReadUsers
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QGraphicsOpacityEffect
-
+from PyQt5.QtWidgets import QMessageBox
 def SetWndIcon(Wnd):  
     Wnd.setWindowIcon(QIcon(r'C:\Users\27879\Desktop\SVRemmendation\recommend.jpg'))
 
@@ -36,9 +33,20 @@ def close_welcome(thread1, thread2, wnd):  # 等待准备工作完成然后关�
     wnd.close()
 def mainwnd_event_filter(obj, event):
     if obj is widget and event.type() == QEvent.Close:
-        print('保存完毕')
-        ##IO.SaveToFile()
-    return False  # 保持默认事件处理
+        msg_box = QMessageBox()
+        msg_box.setIcon(QMessageBox.Question)
+        msg_box.setText("是否要保存本次运行的视频数据")
+        msg_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        msg_box.setDefaultButton(QMessageBox.No)
+        choice = msg_box.exec_()
+        
+        if choice == QMessageBox.Yes:
+            IO.SaveToFile()
+            print('保存完毕')
+        elif choice == QMessageBox.No:
+            print('放弃保存')
+            
+    return False  # 保持默认事件
 
 if __name__ == '__main__':
     # 准备工作，启动线程
@@ -57,10 +65,10 @@ if __name__ == '__main__':
     welcome_wnd.setupUi(widget_wel)
     widget_wel.show()
 
-    SetWndIcon(widget_wel)  # 增加icon图标
+    SetWndIcon(widget_wel) 
 
     th3.start()
-    app.exec_()  # 为欢迎页启动消息循环
+    app.exec_()  
 
     t2 = time.time()
     print('程序准备时间：%s ms' % ((t2 - t1) * 1000))
@@ -77,11 +85,4 @@ if __name__ == '__main__':
     SetWndIcon(widget)  # 增加icon图标
     exit_code = app.exec_()
 
-    # 读取配置文件
-    config = configparser.ConfigParser()
-    config.read('../Setting.ini')
-    if int(config['AutoSave']['default']) == 1:
-        print('开始写文件')
-        IO.SaveToFile()
-        print('程序退出')
     sys.exit(exit_code)  # 为主界面启动消息循环

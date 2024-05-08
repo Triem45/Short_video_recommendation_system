@@ -95,46 +95,6 @@ if __name__ == '__main__':
                                     categories_encoded[i]))
         video_cluster_data.append(features_row)
     video_clu_features = np.delete(video_cluster_data, 0, axis=1) if isinstance(video_cluster_data[0], np.ndarray) else video_cluster_data[:, 1:]
-'''
-    # 定义要尝试的K值范围
-    k_values = range(7, 15, 1)
-
-    # 存储不同K值下的SSE和轮廓系数
-    sse_values = []
-    silhouette_values = []
-
-    for k in k_values:
-        with parallel_backend('loky'):
-            kmeans = KMeans(n_clusters=k, random_state=42)
-            kmeans.fit(video_clu_features)
-
-            # 计算SSE
-            sse = kmeans.inertia_
-            sse_values.append(sse)
-
-            # 计算轮廓系数
-            silhouette_avg = silhouette_score(video_clu_features, kmeans.labels_)
-            silhouette_values.append(silhouette_avg)
-
-    # 绘制SSE vs. K值曲线
-    plt.figure(figsize=(10, 6))
-    plt.plot(k_values, sse_values, marker='o')
-    plt.xlabel('Number of Clusters (K)')
-    plt.ylabel('Sum of Squared Errors (SSE)')
-    plt.title('Elbow Method')
-    plt.grid(True)
-    plt.show()
-
-    # 绘制轮廓系数 vs. K值曲线
-    plt.figure(figsize=(10, 6))
-    plt.plot(k_values, silhouette_values, marker='o')
-    plt.xlabel('Number of Clusters (K)')
-    plt.ylabel('Silhouette Score')
-    plt.title('Silhouette Analysis')
-    plt.grid(True)
-    plt.show()
-'''
-# 使用最佳K值重新运行K-means聚类（这里最佳K值为10）
     kmeans = KMeans(n_clusters=10, random_state=42)
     kmeans.fit(video_clu_features)
 

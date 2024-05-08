@@ -24,7 +24,7 @@ class AutoWnd(UserLoginWndLogic):
                 return
             self.get_in_user(user_id)
 
-            for j in range(1, 3*refresh_frequency):
+            for j in range(1, 3*refresh_frequency):###此处后面参数可以改 表示模拟多少次观看，前面权重表示多少次刷新
                 ilike = random.randint(0, 4)
                 if ilike > 1:
                     self.like()
@@ -48,7 +48,7 @@ class AutoSimulationManager:
         futures = []
         start_time = time.time()  # 记录开始执行任务的时间
 
-        for i in range(1, 10):
+        for i in range(10):## 模拟多少个用户的观看行为
             auto_wnd = AutoWnd()
             future = self.executor.submit(auto_wnd.simulate_user, i)
             futures.append(future)

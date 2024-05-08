@@ -2,7 +2,7 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from GlobalVariable import global_obj,refresh_frequency
 from GenUsers import total_size
-
+from Main import SetWndIcon
 class Ui_UserLoginWnd(object):
     def __init__(self):
         self.location = -1
@@ -14,6 +14,7 @@ class Ui_UserLoginWnd(object):
     def setupUi(self, UserLoginWnd):
         UserLoginWnd.setObjectName("UserLoginWnd")
         UserLoginWnd.resize(961, 794)
+        SetWndIcon(UserLoginWnd) 
         self.listToPlay = QtWidgets.QListWidget(UserLoginWnd)
         self.listToPlay.setGeometry(QtCore.QRect(100, 260, 321, 451))
         font = QtGui.QFont()
@@ -22,7 +23,7 @@ class Ui_UserLoginWnd(object):
         self.listToPlay.setFont(font)
         self.listToPlay.setObjectName("listToPlay")
         self.label = QtWidgets.QLabel(UserLoginWnd)
-        self.label.setGeometry(QtCore.QRect(140, 20, 221, 41))
+        self.label.setGeometry(QtCore.QRect(130, 20, 221, 41))
         font = QtGui.QFont()
         font.setFamily("隶书")
         font.setPointSize(16)
@@ -39,14 +40,14 @@ class Ui_UserLoginWnd(object):
         self.listHistory.setFont(font)
         self.listHistory.setObjectName("listHistory")
         self.label_2 = QtWidgets.QLabel(UserLoginWnd)
-        self.label_2.setGeometry(QtCore.QRect(640, 210, 121, 51))
+        self.label_2.setGeometry(QtCore.QRect(630, 210, 131, 51))
         font = QtGui.QFont()
         font.setFamily("隶书")
         font.setPointSize(16)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(UserLoginWnd)
-        self.label_3.setGeometry(QtCore.QRect(180, 210, 151, 51))
+        self.label_3.setGeometry(QtCore.QRect(170, 210, 161, 51))
         font = QtGui.QFont()
         font.setFamily("隶书")
         font.setPointSize(16)
@@ -56,7 +57,7 @@ class Ui_UserLoginWnd(object):
         self.Query.setGeometry(QtCore.QRect(630, 20, 141, 41))
         font = QtGui.QFont()
         font.setFamily("隶书")
-        font.setPointSize(20)
+        font.setPointSize(18)
         self.Query.setFont(font)
         self.Query.setObjectName("Query")
         self.Share = QtWidgets.QPushButton(UserLoginWnd)
@@ -97,6 +98,20 @@ class Ui_UserLoginWnd(object):
         font.setPointSize(18)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
+        self.label_bg = QtWidgets.QLabel(UserLoginWnd)
+        self.label_bg.setGeometry(QtCore.QRect(0, 0, UserLoginWnd.width(), UserLoginWnd.height()))  # 设置背景图片大小为窗口大小
+        self.label_bg.setPixmap(QtGui.QPixmap(r'C:\Users\27879\Desktop\SVRemmendation\xuexiao.jpg').scaled(UserLoginWnd.width(), UserLoginWnd.height()))  # 使用scaled方法将图片缩放到窗口大小
+        opacity_effect = QtWidgets.QGraphicsOpacityEffect()
+        opacity_effect.setOpacity(0.5)  # 设置透明度，值范围为0（完全透明）到1（完全不透明）
+        self.label_bg.setGraphicsEffect(opacity_effect)
+
+        self.label_bg.setAlignment(QtCore.Qt.AlignCenter)  # 设置对齐方式为居中
+        self.label_bg.setObjectName("label_bg")
+        # 将背景图片放置在窗口中心，不需要再手动计算位置
+        self.label_bg.move(0, 0)
+
+        # 将背景图片置于底层
+        self.label_bg.lower()
 
 
         self.retranslateUi(UserLoginWnd)
@@ -109,7 +124,7 @@ class Ui_UserLoginWnd(object):
 
     def retranslateUi(self, UserLoginWnd):
         _translate = QtCore.QCoreApplication.translate
-        UserLoginWnd.setWindowTitle(_translate("UserLoginWnd", "用户测试"))
+        UserLoginWnd.setWindowTitle(_translate("UserLoginWnd", "用户登陆"))
         self.label.setText(_translate("UserLoginWnd", "请输入用户 uid："))
         self.label_2.setText(_translate("UserLoginWnd", "历史记录"))
         self.label_3.setText(_translate("UserLoginWnd", "待播放视频"))
@@ -118,7 +133,7 @@ class Ui_UserLoginWnd(object):
         self.Comment.setText(_translate("UserLoginWnd", "评论"))
         self.Praise.setText(_translate("UserLoginWnd", "点赞"))
         self.Query_2.setText(_translate("UserLoginWnd", "下一个视频"))
-        self.label_4.setText(_translate("UserLoginWnd", "当前播放视频"))
+        self.label_4.setText(_translate("UserLoginWnd", "当前播放"))
 
     def like(self):
         self.if_like = 1

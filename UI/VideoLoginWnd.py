@@ -12,11 +12,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from GlobalVariable import global_obj
 from GenUsers import total_size
 import GlobalVariable
-
+from Main import SetWndIcon
 class Ui_VideoLoginWnd(object):
     def setupUi(self, VideoLoginWnd):
         VideoLoginWnd.setObjectName("VideoLoginWnd")
         VideoLoginWnd.resize(881, 701)
+        SetWndIcon(VideoLoginWnd) 
         self.label = QtWidgets.QLabel(VideoLoginWnd)
         self.label.setGeometry(QtCore.QRect(30, 50, 221, 31))
         font = QtGui.QFont()
@@ -49,14 +50,14 @@ class Ui_VideoLoginWnd(object):
         self.listView_2.setFont(font)
         self.listView_2.setObjectName("listView_2")
         self.label_2 = QtWidgets.QLabel(VideoLoginWnd)
-        self.label_2.setGeometry(QtCore.QRect(130, 100, 181, 31))
+        self.label_2.setGeometry(QtCore.QRect(120, 100, 191, 31))
         font = QtGui.QFont()
         font.setFamily("隶书")
         font.setPointSize(16)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(VideoLoginWnd)
-        self.label_3.setGeometry(QtCore.QRect(590, 100, 151, 31))
+        self.label_3.setGeometry(QtCore.QRect(580, 100, 161, 31))
         font = QtGui.QFont()
         font.setFamily("隶书")
         font.setPointSize(16)
@@ -69,6 +70,23 @@ class Ui_VideoLoginWnd(object):
         font.setPointSize(22)
         self.Query_2.setFont(font)
         self.Query_2.setObjectName("Query_2")
+
+        self.label_bg = QtWidgets.QLabel(VideoLoginWnd)
+        self.label_bg.setGeometry(QtCore.QRect(0, 0, VideoLoginWnd.width(), VideoLoginWnd.height()))  # 设置背景图片大小为窗口大小
+        self.label_bg.setPixmap(QtGui.QPixmap(r'C:\Users\27879\Desktop\SVRemmendation\xuexiao.jpg').scaled(VideoLoginWnd.width(), VideoLoginWnd.height()))  # 使用scaled方法将图片缩放到窗口大小
+        opacity_effect = QtWidgets.QGraphicsOpacityEffect()
+        opacity_effect.setOpacity(0.5)  # 设置透明度，值范围为0（完全透明）到1（完全不透明）
+        self.label_bg.setGraphicsEffect(opacity_effect)
+
+        self.label_bg.setAlignment(QtCore.Qt.AlignCenter)  # 设置对齐方式为居中
+        self.label_bg.setObjectName("label_bg")
+        # 将背景图片放置在窗口中心，不需要再手动计算位置
+        self.label_bg.move(0, 0)
+
+        # 将背景图片置于底层
+        self.label_bg.lower()
+
+
 
         self.retranslateUi(VideoLoginWnd)
         self.Query.clicked.connect(self.query) # type: ignore

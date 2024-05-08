@@ -15,7 +15,7 @@ class Ui_Welcome(object):
         self.label_3.setGeometry(QtCore.QRect(190, 430, 391, 31))
         font = QtGui.QFont()
         font.setFamily("隶书")
-        font.setPointSize(16)
+        font.setPointSize(15)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
 
